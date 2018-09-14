@@ -1,0 +1,12 @@
+<div class="card border-dark text-center">
+  <img class="card-img-top" src="https://blogdev01.files.wordpress.com/2014/01/facebookprofilepic.jpg" alt="Card image cap">
+  <p class="card-text mt-3">
+    <a class="item">{{collegue.pseudo}}</a>
+  </p>
+  <p class="card-text">
+    <a class="item">+ {{collegue.score}}</a>
+  </p>
+
+  <app-avis-component (avis)="traiter($event)"></app-avis-component>
+  {{avisRecu}}
+</div>
