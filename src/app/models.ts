@@ -6,3 +6,10 @@ export class Collegue {
     score:number;
     
 }
+
+export class Vote {
+
+    pseudo:string;
+    avis:Avis;
+    
+}
