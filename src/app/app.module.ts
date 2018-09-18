@@ -10,6 +10,7 @@ import { AvisComponentComponent } from './avis-component/avis-component.componen
 import { CollegueComponentComponent } from './collegue-component/collegue-component.component';
 import { ListeColleguesComponent } from './liste-collegues/liste-collegues.component';
 import { HistoriqueVotesComponent } from './historique-votes/historique-votes.component';
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { HistoriqueVotesComponent } from './historique-votes/historique-votes.co
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     MDBBootstrapModule.forRoot()
   ],
   providers: [],

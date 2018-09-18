@@ -1,7 +1,6 @@
-
-  <button type="button" class="btn btn-outline-dark">Rafraichir la liste</button>
+<button type="button" class="btn btn-outline-dark">Rafraichir la liste</button>
   <div class="card-deck">
-    <section class="col-4" *ngFor="let col of colleguesTab">
+    <section class="col-4" *ngFor="let col of collegues">
       <div class="mt-4">
         <app-collegue-component [collegue]="col"></app-collegue-component>
       </div>

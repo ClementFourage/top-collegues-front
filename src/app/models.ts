@@ -1,15 +1,29 @@
-export enum Avis {AIMER, DETESTER};
+export enum Avis {
+    AIMER = "Aimer", 
+    DETESTER= "Detester"
+};
 
 export class Collegue {
-
+   
     pseudo:string;
     score:number;
-    
+    img:string;  
+
+    constructor(pseudo, score, img){
+        this.pseudo = pseudo;
+        this.score = score;
+        this.img = img;
+    }
+
 }
 
 export class Vote {
 
-    pseudo:string;
+    collegue:Collegue;
     avis:Avis;
     
+    constructor(avis, collegue) {
+        this.avis = avis;
+        this.collegue = collegue;
+    }
 }

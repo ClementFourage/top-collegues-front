@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { CollegueService } from '../services/collegue.service'
 import { Collegue, Avis } from '../models';
 
 @Component({
@@ -10,18 +11,28 @@ import { Collegue, Avis } from '../models';
 export class CollegueComponentComponent implements OnInit {
 
   @Input() collegue: Collegue;
+  @Input() avisRecu: string;
+  err: string;
 
-  constructor() { }
+  constructor(private _postSrv: CollegueService) { }
 
-  avisRecu: string;
-  traiter($event: Avis) {
-    console.log('gfff', $event)
-    // if ($event == Avis.AIMER)
-    this.avisRecu = "Vous avez aimé";
-    if ($event == Avis.DETESTER)
-      this.avisRecu = "Vous avez détesté";
+  afficherAvis(avis: string) {
+    this._postSrv
+      .donnerUnAvis(this.collegue, avis.toUpperCase())
+      .then(col => {
+
+        if (avis === Avis.AIMER) {
+          this.collegue.score = col.score
+          this.avisRecu = "Vous avez aimé";
+        }
+
+        if (avis === Avis.DETESTER) {
+          this.collegue.score = col.score
+          this.avisRecu = "Vous avez détesté";
+        }
+      }
+      )
   }
-
 
   ngOnInit() {
   }

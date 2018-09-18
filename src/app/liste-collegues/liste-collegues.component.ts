@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Collegue } from '../models';
+import { CollegueService } from '../services/collegue.service';
 
 @Component({
   selector: 'app-liste-collegues',
@@ -8,11 +9,15 @@ import { Collegue } from '../models';
 })
 export class ListeColleguesComponent implements OnInit {
 
-  @Input() colleguesTab:Collegue[]
+  collegues: Collegue[] = [];
 
-  constructor() { }
+  err: string;
 
+  constructor(private _postSrv: CollegueService) { }
   ngOnInit() {
+    this._postSrv
+      .listerCollegues()
+      .then(tabPosts => (this.collegues = tabPosts))
+      .catch(err => (this.err = err));
   }
-
 }
