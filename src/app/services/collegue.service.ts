@@ -16,7 +16,7 @@ export class CollegueService {
     return this._http
       .get(URL_BACKEND)
       .toPromise()
-      .then((data: any[]) => data.map(d => new Collegue(d.nom, d.score, d.imageUrl)));
+      .then((data: any[]) => data.map(d => new Collegue(d.pseudo, d.score, d.imageUrl)));
     // récupérer la liste des collègues côté serveur
   }
 

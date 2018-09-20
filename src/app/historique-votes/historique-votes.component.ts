@@ -1,37 +1,21 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Collegue, Avis, Vote} from '../models';
-
+import { Component, OnInit } from '@angular/core';
+import { Vote, Avis, Collegue } from '../models';
 @Component({
   selector: 'app-historique-votes',
   templateUrl: './historique-votes.component.html',
   styleUrls: ['./historique-votes.component.scss']
 })
 export class HistoriqueVotesComponent implements OnInit {
-
-  @Input() voteTab:Vote[]
-
+  votes: Array<Vote>;
+  vote1: Vote
+  newVote: Array<Vote>
+  vote: Vote;
   constructor() {
-    /*const col2 = new Collegue();
-    col2.pseudo = "Archer";
-    col2.score = 1000;
-
-    const vote1 = new Vote();
-    vote1.avis = Avis.AIMER;
-    vote1.collegue = col2;
-
-    const vote2 = new Vote();
-    vote2.avis = Avis.DETESTER;
-    vote2.collegue = col2;
-
-    this.voteTab = [vote1, vote2];*/
-
-   }
-
-  clicDelete() {
-    //Supprimer le vote
+    this.votes = [new Vote(Avis.AIMER, new Collegue("Irvin", 500, "https://blogdev01.files.wordpress.com/2014/01/facebookprofilepic.jpg")),
+    new Vote(Avis.AIMER, new Collegue("Pénélope", 500, "https://blogdev01.files.wordpress.com/2014/01/facebookprofilepic.jpg")),
+    new Vote(Avis.DETESTER, new Collegue("Rose-Marie", 500, "https://blogdev01.files.wordpress.com/2014/01/facebookprofilepic.jpg")),
+    new Vote(Avis.DETESTER, new Collegue("Marie-Rose", 500, "https://blogdev01.files.wordpress.com/2014/01/facebookprofilepic.jpg"))]
   }
-
   ngOnInit() {
   }
-
 }
