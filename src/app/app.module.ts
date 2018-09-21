@@ -19,6 +19,7 @@ import { FormsModule }   from '@angular/forms';
 import { AjoutCollegueComponent } from './ajout-collegue/ajout-collegue.component';
 import { ScorePipe } from './pipes/score.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
+import { VotreDernierAvisComponent } from './votre-dernier-avis/votre-dernier-avis.component';
 
 
 
@@ -47,7 +48,8 @@ const appRoutes: Routes = [
     DetailsCollegueComponent,
     AjoutCollegueComponent,
     ScorePipe,
-    FilterPipe
+    FilterPipe,
+    VotreDernierAvisComponent
   ],
   imports: [
     BrowserModule,

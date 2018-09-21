@@ -1,19 +1,23 @@
-<div class="container text-center">
+<div class="container text-center mt-3">
 
   <div>
-    <img src="{{collegue.img}}" alt="photo" />
-    <p>{{collegue.pseudo}}</p>
-    <p>{{collegue.score}}</p>
+    <img src="{{collegue.img}}" alt="img" style="width: 300px; height: 300px;"/>
+  </div>
+  <div class="mt-4">
+    <h4>{{collegue.pseudo}}</h4>
+    <h5>{{collegue.score}}</h5>
   </div>
 
-  <div class="mt-5">
+  <hr>
+  <div class="mt-3">
     <p>{{collegue.nom}}</p>
     <p>{{collegue.prenom}}</p>
     <p>{{collegue.email}}</p>
     <p>{{collegue.adresse}}</p>
   </div>
+  
   <div>
     <app-avis (avis)=afficherAvis($event)></app-avis>
-    <p>{{avisRecu}}</p>
+    <p>{{avis}}</p>
   </div>
 </div>

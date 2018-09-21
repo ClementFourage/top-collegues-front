@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Collegue, formCollegue } from '../models';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
+import {Observable, Subject} from 'rxjs'
+import { map, filter } from 'rxjs/operators';
 
 const URL_BACKEND = environment.backendUrl;
 
@@ -10,38 +12,48 @@ const URL_BACKEND = environment.backendUrl;
 })
 
 export class CollegueService {
+  private _superBus = new Subject<string>();
+
+  get superBus(): Observable<string> {
+    return this._superBus.asObservable();
+  }
 
   constructor(private _http: HttpClient) {}
 
-  listerCollegues():Promise<Collegue[]>  {
+  listerCollegues():Observable<Collegue[]>  {
     return this._http
       .get(URL_BACKEND+"collegues/")
-      .toPromise()
-      .then((data: any[]) => data.map(coll => new Collegue(coll.pseudo, coll.nom, coll.prenom, coll.email, coll.adresse,coll.score,coll.photo)));
-    // récupérer la liste des collègues côté serveur
+      .pipe(
+        map((data: any[]) =>
+          data.map(collegue =>
+            new Collegue(collegue.pseudo, collegue.nom, collegue.prenom, collegue.email, collegue.adresse,collegue.score,collegue.photo))
+          )
+        )
+      ;
   }
 
-  donnerUnAvis(unCollegue: Collegue, avis: string): Promise<Collegue> {
-
-    // TODO Aimer ou Détester un collègue côté serveur
+  donnerUnAvis(unCollegue: Collegue, avis: string): Observable<Collegue> {
+    this._superBus.next(`${unCollegue.pseudo} a reçu le vote "${avis}" `);
     let resultat
     const httpOptions = {
       headers: new HttpHeaders({
         "Content-Type": "application/json"
       })
     };
-    resultat = this._http.patch(URL_BACKEND+"collegues/" + `/${unCollegue.pseudo}`, "{ \"action\" : \""+avis+"\" }", httpOptions).toPromise()
+    resultat = this._http.patch(URL_BACKEND+"collegues/" + `/${unCollegue.pseudo}`, "{ \"action\" : \""+avis+"\" }", httpOptions)
     
     return resultat
   
   }
 
-  listerUnCollegue(pseudo: String): Promise<Collegue>{
+  listerUnCollegue(pseudo: String): Observable<Collegue>{
     return this._http
       .get(URL_BACKEND+"collegues/"+pseudo)
-      .toPromise()
-      .then((coll: any) => new Collegue(coll.pseudo, coll.nom, coll.prenom, coll.email, coll.adresse,coll.score,coll.photo));
-  }
+      .pipe(
+        map((collegue: any) => new Collegue(collegue.pseudo, collegue.nom, collegue.prenom, collegue.email, collegue.adresse,collegue.score,collegue.photo))
+          )
+      ;
+    }
 
   trouverUnCollegue(monForm: formCollegue){
     let resultat;

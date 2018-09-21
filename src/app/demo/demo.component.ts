@@ -10,15 +10,6 @@ import { CollegueService } from '../services/collegue.service';
 
 export class DemoComponent implements OnInit {
 
-  collegues: Collegue[] = [];
-
-  err: string;
-
-  constructor(private _postSrv: CollegueService) { }
-  ngOnInit() {
-    this._postSrv
-      .listerCollegues()
-      .then(tabPosts => (this.collegues = tabPosts))
-      .catch(err => (this.err = err));
-  }
+  constructor() { }
+  ngOnInit() { }
 }

@@ -18,7 +18,7 @@ export class CollegueComponent implements OnInit {
   afficherAvis(avis: string) {
     this._postSrv
       .donnerUnAvis(this.collegue, avis.toUpperCase())
-      .then(col => {
+      .subscribe(col => {
 
         if (avis === Avis.AIMER) {
           this.collegue.score = col.score
