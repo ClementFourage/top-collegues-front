@@ -1,5 +1,19 @@
-<!--
-    <div class="text-center">
-<img src={{collegue.img}} class="img-thumbnail">
+<div class="container text-center">
+
+  <div>
+    <img src="{{collegue.img}}" alt="photo" />
+    <p>{{collegue.pseudo}}</p>
+    <p>{{collegue.score}}</p>
+  </div>
+
+  <div class="mt-5">
+    <p>{{collegue.nom}}</p>
+    <p>{{collegue.prenom}}</p>
+    <p>{{collegue.email}}</p>
+    <p>{{collegue.adresse}}</p>
+  </div>
+  <div>
+    <app-avis (avis)=afficherAvis($event)></app-avis>
+    <p>{{avisRecu}}</p>
+  </div>
 </div>
--->

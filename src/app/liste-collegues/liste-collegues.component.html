@@ -1,8 +1,17 @@
-<button type="button" class="btn btn-outline-dark mt-5">Rafraichir la liste</button>
-  <div class="card-deck">
-    <section class="col-4" *ngFor="let col of collegues">
-      <div class="mt-5">
-        <app-collegue-component [collegue]="col"></app-collegue-component>
-      </div>
-    </section>
-  </div>
+<button type="button" class="btn btn-outline-dark mt-5" onclick="location.reload()">Rafraichir la liste</button>
+<button type="button" class="btn btn-outline-dark mt-5" routerLink="/collegues/nouveau">Ajouter un collegue</button>
+
+<div class="form-group mb-2">
+  Filtrer par pseudo
+</div>
+<div class="form-group mx-sm-3 mb-2">
+  <input [(ngModel)]="searchText" type="text">
+</div>
+
+<div class="card-deck">
+  <section class="col-4" *ngFor="let col of collegues | filter : searchText">
+    <div class="mt-5">
+      <app-collegue [collegue]="col"></app-collegue>
+    </div>
+  </section>
+</div>

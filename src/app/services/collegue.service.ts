@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Collegue, Avis } from '../models';
+import { Collegue, formCollegue } from '../models';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 
@@ -8,15 +8,16 @@ const URL_BACKEND = environment.backendUrl;
 @Injectable({
   providedIn: 'root'
 })
+
 export class CollegueService {
 
   constructor(private _http: HttpClient) {}
 
   listerCollegues():Promise<Collegue[]>  {
     return this._http
-      .get(URL_BACKEND)
+      .get(URL_BACKEND+"collegues/")
       .toPromise()
-      .then((data: any[]) => data.map(d => new Collegue(d.pseudo, d.score, d.imageUrl)));
+      .then((data: any[]) => data.map(coll => new Collegue(coll.pseudo, coll.nom, coll.prenom, coll.email, coll.adresse,coll.score,coll.photo)));
     // récupérer la liste des collègues côté serveur
   }
 
@@ -29,11 +30,27 @@ export class CollegueService {
         "Content-Type": "application/json"
       })
     };
-    resultat = this._http.patch(URL_BACKEND + `/${unCollegue.pseudo}`, "{ \"action\" : \""+avis+"\" }", httpOptions).toPromise()
+    resultat = this._http.patch(URL_BACKEND+"collegues/" + `/${unCollegue.pseudo}`, "{ \"action\" : \""+avis+"\" }", httpOptions).toPromise()
     
     return resultat
   
   }
+
+  listerUnCollegue(pseudo: String): Promise<Collegue>{
+    return this._http
+      .get(URL_BACKEND+"collegues/"+pseudo)
+      .toPromise()
+      .then((coll: any) => new Collegue(coll.pseudo, coll.nom, coll.prenom, coll.email, coll.adresse,coll.score,coll.photo));
+  }
+
+  trouverUnCollegue(monForm: formCollegue){
+    let resultat;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json"
+      })
+    };
+    resultat = this._http.post(URL_BACKEND+"collegues/nouveau",monForm , httpOptions).toPromise();
+    return resultat;
+  }
 }
-
-
