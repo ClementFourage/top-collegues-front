@@ -16,9 +16,7 @@ export class DetailsCollegueComponent implements OnInit {
   collegue: Collegue;
   err: string;
 
-  // Injection du service ActivatedRoute
   constructor(private route: ActivatedRoute, private _postSrv: CollegueService) { 
-    // récupération du paramètre pseudo
     this.pseudo = route.snapshot.paramMap.get("pseudo")
   }
 

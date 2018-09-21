@@ -10,7 +10,7 @@ import { CollegueService } from '../services/collegue.service';
 export class ListeColleguesComponent implements OnInit {
 
   collegues: Collegue[] = [];
-
+  searchText: String;
   err: string;
 
   constructor(private _postSrv: CollegueService) { }
